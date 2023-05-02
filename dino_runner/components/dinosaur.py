@@ -21,8 +21,7 @@ class Dinosaur(Sprite):
         
         self.step = 0  
         self.action = DINO_RUNNING
-        self.jump_velocity = JUMP_VELOCITY
-        #self.original_pos_y = self.rect.y
+        self.jump_velocity = JUMP_VELOCITY      
 
     def update(self,user_input):
         if self.action == DINO_RUNNING:
@@ -31,6 +30,7 @@ class Dinosaur(Sprite):
             self.jump()
         elif self.action == DINO_DUCKING:
             self.duck()
+
         if self.action != DINO_JUMPING:
             if user_input[pygame.K_UP]:
                 self.action = DINO_JUMPING
@@ -57,10 +57,10 @@ class Dinosaur(Sprite):
     def run(self):
         self.image = RUNNING[0] if self.step < 5  else RUNNING[1]
         self.step += 1
+        self.rect.y = self.POS_Y
     
     def duck(self):
         self.image = DUCKING[0] if self.step < 5  else DUCKING[1]
         self.step += 1
         self.rect.y = self.POS_Y_DUCK
-        #if self.step == 5:
-        #    self.rect.y = self.original_pos_y
+      
