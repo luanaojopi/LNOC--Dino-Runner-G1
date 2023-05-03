@@ -2,6 +2,7 @@ import pygame
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
 from dino_runner.components.obstacles.score import Score
+from dino_runner.components.obstacles.text import Text
 from dino_runner.utils.constants import BG, DINO_START, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 
 
@@ -75,6 +76,7 @@ class Game:
 
     def on_death(self):
         pygame.time.delay(500)
+        self.score.score = 0
         self.playing = False
         self.death_count += 1
 
@@ -82,17 +84,27 @@ class Game:
         center_x = SCREEN_WIDTH // 2
         center_y = SCREEN_HEIGHT // 2
         self.screen.fill((255, 255, 255))
-        #if self.death_count == 0:
-        font = pygame.font.Font('freesansbold.ttf', 30)
-        text = font.render("Press any key to start.", True, (0,0,0))
-        text_rect = text.get_rect()
-        text_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-        self.screen.blit(text, text_rect)
-        self.screen.blit(DINO_START, (center_x - 49, center_y - 101))
-        pygame.display.update()
-        self.handle_menu_events()
-        #else:
-         #   print(self.death_count)
+        if self.death_count == 0:
+            text_start = Text("Press any key to start.", (center_x, center_y))
+            text_start.draw(self.screen)
+            self.screen.blit(DINO_START, (center_x - 49, center_y - 101))
+            pygame.display.update()
+            self.handle_menu_events()
+        else:
+            text_death_count = Text(f"Deaths {self.death_count}", (1000, 50))
+            text_restart = Text("Press 'R' to restart.", (center_x, center_y + 50))
+            text_score = Text(f"Score {self.score.score}", (center_x, center_y + 100))
+            text_high_score = Text(f"High Score: {self.score.high_score}", (center_x, center_y + 150))
+            text_death_count.draw(self.screen)
+            text_restart.draw(self.screen)
+            text_score.draw(self.screen)
+            text_high_score.draw(self.screen)
+            pygame.display.update()
+        #mostrar mensaje de reinicio
+        #mostrat puntaje obtenido
+        #mostarr numero de muertes
+
+        #mostrar puntaje mas alto obtenido
     
     def handle_menu_events(self):
         for event in pygame.event.get():
