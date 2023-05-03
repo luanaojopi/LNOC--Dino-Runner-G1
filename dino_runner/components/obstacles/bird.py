@@ -7,12 +7,12 @@ class Bird(Obstacles):
 
     def __init__(self, image):
         self.type = 0
-        super().__init__(image, self.type)
+        super().__init__(image[0], self.type)
         self.rect.y = random.choice(self.BIRD_HEIGHTS)
         self.step = 0
         
     def draw(self, screen):
-        if self.step >= 9:
+        if self.step >= 5:
             self.step = 0
         self.image = BIRD[0] if self.step < 5  else BIRD[1]
         self.step += 1
