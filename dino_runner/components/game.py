@@ -1,4 +1,5 @@
 import pygame
+import pygame.mixer
 
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacleManager import ObstacleManager
@@ -12,8 +13,10 @@ from dino_runner.utils.constants import BG, DINO_START, HAMMER_TYPE, ICON, RESET
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
         pygame.display.set_caption(TITLE)
         pygame.display.set_icon(ICON)
+        
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.playing = False
@@ -28,6 +31,7 @@ class Game:
         self.death_count = 0
         self.power_up_manager = PowerUpManager()
         self.cloud = Cloud()
+        
 
     def run(self):
         # Game loop: events - update - draw
@@ -52,6 +56,7 @@ class Game:
         self.obstacle_manager.reset()
         self.score.reset()
         self.power_up_manager.reset()
+        pygame.mixer.music.play(-1)
         
     def events(self):
         for event in pygame.event.get():
@@ -102,6 +107,7 @@ class Game:
             pygame.time.delay(500)
             self.playing = False
             self.death_count += 1
+            pygame.mixer.music.stop()
 
     def show_menu(self):
         center_x = SCREEN_WIDTH // 2

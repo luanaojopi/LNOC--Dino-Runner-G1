@@ -1,17 +1,21 @@
 import pygame
 import os
 
+pygame.mixer.init()
 # Global Constants
 TITLE = "Chrome Dino Runner"
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
 FPS = 30
 IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
+AUDIO_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
 DINO_START = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoStart.png"))
 RESET = pygame.image.load(os.path.join(IMG_DIR, "Other/Reset.png"))
+
+AUDIO = pygame.mixer.music.load(os.path.join(AUDIO_DIR, "Other/EyeOfTheTiger.mp3"))
 
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),

@@ -16,8 +16,8 @@ class Score:
             self.high_score = self.score
 
     def draw(self, screen):
-        score_text = Text(f"Score {self.score}", (1000, 50))
-        score_text.draw(screen)
+        Text(f"Score {self.score}", (1000, 50)).draw(screen)
+        Text(f"High Score {self.high_score}", (1000, 75)).draw(screen)
 
     def reset(self):
         self.score = 0
