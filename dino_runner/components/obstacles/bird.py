@@ -12,7 +12,7 @@ class Bird(Obstacles):
         self.step = 0
         
     def draw(self, screen):
-        if self.step >= 5:
+        if self.step >= 10:
             self.step = 0
         self.image = BIRD[0] if self.step < 5  else BIRD[1]
         self.step += 1

@@ -19,4 +19,7 @@ class Score:
         score_text = Text(f"Score {self.score}", (1000, 50))
         score_text.draw(screen)
 
+    def reset(self):
+        self.score = 0
+
        
